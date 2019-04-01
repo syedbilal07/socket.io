@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Event For Web Browser</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('testerEvent', function(data) {document.write(data.description)});
+    </script>
+</head>
+<body>
+    Hello World
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../W3Schools Practice/Libraries/Bootstrap Library/css/bootstrap.min.css">
+    <script src="../../../W3Schools Practice/Libraries/Bootstrap Library/js/jquery.min.js"></script>
+    <script src="../../../W3Schools Practice/Libraries/Bootstrap Library/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('');
+        // Sending User Name To Server
+        function setUsername(){
+            socket.emit('setUsername', document.getElementById('name').value);
+        }
+        var user;
+        socket.on('userExists', function(data){
+           document.getElementById('error-container').innerHTML = data;
+        });
+        socket.on('userSet', function(data){
+           user = data.username;
+           document.body.innerHTML = '<input type = "text" id = "message">\
+           <button type = "button" class = "btn btn-success" name = "button" onclick = "sendMessage()">Send</button> \
+           <div id = "message-container"></div>';
+        });
+        function sendMessage(){
+            var msg = document.getElementById('message').value;
+            if(msg){
+                socket.emit('msg', {message: msg, user: user});
+            }
+        }
+        socket.on('newmsg', function(data){
+           if(user){
+               document.getElementById('message-container').innerHTML += '<div><b>' + data.user + '</b>: ' + data.message + '</div>';
+           }
+        })
+    </script>
+</head>
+<body>
+    <div id="error-container"></div>
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <input type="text" name = "name" value = "" placeholder = "Enter Your Name!" class = "form-control" id = "name">
+        <br />
+        <button type = "button" class = "btn btn-success" onClick = "setUsername()" name = "button">Let Me Chat!</button>
+    </div>
+</body>
+</html>

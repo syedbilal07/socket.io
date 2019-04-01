@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Namespaces</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('/my-namespace');
+        socket.on('hi', function(data){
+           document.body.innerHTML = '';
+           document.write(data);
+        });
+    </script>
+</head>
+    <body>
+
+    </body>
+</html>

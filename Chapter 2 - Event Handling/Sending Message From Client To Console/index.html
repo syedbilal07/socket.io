@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sending Message From Client To Console</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.emit('clientEvent', 'Greeting From Client');
+    </script>
+</head>
+<body>
+    Hello World
+</body>
+</html>

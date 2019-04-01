@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rooms</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('');
+        socket.on('connectToRoom', function(data){
+           document.body.innerHTML = '';
+           document.write(data);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
